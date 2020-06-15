@@ -34,8 +34,8 @@ export default class App extends Component
         <Text style={{fontSize:18}}>Password: </Text>
         <TextInput secureTextEntry= {true}
         placeholder="Enter password"
-        value={this.state.email}
-        onChangeText={ (text)=> this.setState({email: text})}>
+        value={this.state.password}
+        onChangeText={ (text)=> this.setState({password: text})}>
              
         </TextInput>
         </View>
