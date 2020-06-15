@@ -1,10 +1,15 @@
 
-import React,{Component} from 'react';
+import React,{Component, useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Button, TouchableOpacity, AsyncStorage} from 'react-native';
 //inport {AsyncStorage} from "react-native"//
 
+
 export default class App extends Component
+
 {
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
+
   render()
   {
     return(
@@ -16,7 +21,10 @@ export default class App extends Component
         <View style={styles.head}>
         <Text style={{fontSize:18}}>Email: </Text>
         <TextInput
-        placeholder="abc@xyz.com">
+          placeholder="abc@xyz.com"
+          // onChangeText={this.emailChange}
+          value={this.state.email}
+          onChangeText={ (text)=> this.setState({email: text})}>
              
         </TextInput>
         </View>
@@ -25,7 +33,9 @@ export default class App extends Component
         <View style={styles.head}>
         <Text style={{fontSize:18}}>Password: </Text>
         <TextInput secureTextEntry= {true}
-        placeholder="Enter password">
+        placeholder="Enter password"
+        value={this.state.email}
+        onChangeText={ (text)=> this.setState({email: text})}>
              
         </TextInput>
         </View>
@@ -38,18 +48,30 @@ export default class App extends Component
       </View>
     );
   }
-}
-saveData() {
+};
+// emailChange = (e) => {
+//   setEmail(e.target.value);
+// };
+// passwordChange= (e) => {
+//   setPassword(e.target.value);
+// }
+saveData = () => {
   Let obj = {
-    email : "Email",
-    password : "Password",
+    email : email,
+    password : password,
   }
   AsyncStorage.setItem('user',JSON.stringify(obj));
 }
-displayData() =async () => {
+displayData = () => async () => {
   try{
     let user =await AsyncStorage.getItem('user');
-    alert("Details have been saved")
+    if (email === user.email && password === user.password)
+      {alert("Details have been saved")
+      }
+    else {
+      alert("Wrong email or password")
+    }
+
   }
   catch(error) {
     alert("Username not registered")
